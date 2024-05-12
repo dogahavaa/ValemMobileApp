@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:valem_application/pages/account.dart';
 
 void main() {
   runApp(const MyApp());
+  //sds
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: const MyHomePage(title: 'Valem'),
+      home: AccountPage(),
     );
   }
 }
