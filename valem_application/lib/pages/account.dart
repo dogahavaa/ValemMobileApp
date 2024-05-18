@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:valem_application/widgets/background.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -23,12 +23,8 @@ class AccountPage extends StatelessWidget {
 
 Widget content() {
   return Stack(children: [
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: gradientBackground(),
-    ),
-    Container(
+    const BackgroundWidget(),
+    SizedBox(
       height: double.infinity,
       child: SingleChildScrollView(
         //physics: AlwaysScrollableScrollPhysics(),
@@ -57,16 +53,16 @@ Widget content() {
                 fontSize: 16,
               ),
             ),
-            //const SizedBox(height: 50),
+            const SizedBox(height: 50),
             Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 40),
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16))),
                     child: const Text(
@@ -75,27 +71,27 @@ Widget content() {
                         color: Colors.brown,
                         fontSize: 16,
                         letterSpacing: 1.4,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   //padding: EdgeInsets.symmetric(vertical: 50),
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16))),
                     child: const Text(
-                      "Otopark Üye Girişi",
+                      "Otopark'a Üye Ol",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.brown,
                         fontSize: 16,
                         letterSpacing: 1.4,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -107,15 +103,4 @@ Widget content() {
       ),
     ),
   ]);
-}
-
-BoxDecoration gradientBackground() {
-  return const BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [Color(0xFFF8EDEB), Color(0xFFF9DCC4), Color(0xFFF9DCC4)],
-      stops: [0.05, 0.5, 0.9],
-    ),
-  );
 }
