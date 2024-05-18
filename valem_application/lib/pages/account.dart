@@ -16,12 +16,12 @@ class AccountPage extends StatelessWidget {
         elevation: 0.005,
         shadowColor: Colors.black,
       ),
-      body: content(),
+      body: content(context),
     );
   }
 }
 
-Widget content() {
+Widget content(BuildContext context) {
   return Stack(children: [
     const BackgroundWidget(),
     SizedBox(
@@ -80,7 +80,9 @@ Widget content() {
                   //padding: EdgeInsets.symmetric(vertical: 50),
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/registerScreen');
+                    },
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
