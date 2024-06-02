@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:valem_application/widgets/appBarDesigns.dart';
 import 'package:valem_application/widgets/background.dart';
 
 class AccountPage extends StatelessWidget {
@@ -8,14 +9,7 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Hesabım"),
-        centerTitle: false,
-        titleSpacing: 50,
-        backgroundColor: const Color(0xFFF8EDEB),
-        elevation: 0.005,
-        shadowColor: Colors.black,
-      ),
+      appBar: const BrownValemAppBar(),
       body: content(context),
     );
   }
@@ -60,7 +54,9 @@ Widget content(BuildContext context) {
                   padding: const EdgeInsets.symmetric(vertical: 40),
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/loginScreen');
+                    },
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(15),
                         shape: RoundedRectangleBorder(
@@ -88,7 +84,7 @@ Widget content(BuildContext context) {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16))),
                     child: const Text(
-                      "Otopark'a Üye Ol",
+                      "Otopark Kayıt Et",
                       style: TextStyle(
                         color: Colors.brown,
                         fontSize: 16,

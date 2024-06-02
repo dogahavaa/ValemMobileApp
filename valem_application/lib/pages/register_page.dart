@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:valem_application/services/auth_services.dart';
+import 'package:valem_application/services/models/otopark.dart';
+import 'package:valem_application/widgets/appBarDesigns.dart';
 import 'package:valem_application/widgets/background.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -9,27 +13,13 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "VALEM",
-          style: GoogleFonts.montserrat(
-            color: Colors.brown,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 4,
-          ),
-        ),
-        centerTitle: true,
-        titleSpacing: 50,
-        backgroundColor: const Color(0xFFF8EDEB),
-        elevation: 0.005,
-        shadowColor: Colors.black,
-      ),
-      body: _content(),
+      appBar: BrownValemAppBar(),
+      body: content(),
     );
   }
 }
 
-Widget _content() {
+Widget content() {
   return Stack(
     children: const <Widget>[
       BackgroundWidget(),
@@ -77,6 +67,34 @@ class _MyFormState extends State<MyForm> {
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  addCarPark() {
+    if (_formKey.currentState!.validate()) {
+      // bu kısım düzenlenecek
+      //ScaffoldMessenger.of(context)
+      //    .showSnackBar(SnackBar(content: Text('Kayıt İşlemi Yapılıyor..')));
+
+      Otopark otopark = Otopark(
+          name: nameController.text.trim(),
+          phone: phoneController.text.trim(),
+          email: mailController.text.trim(),
+          password: passwordController.text.trim(),
+          creationtime: Timestamp.now());
+
+      MyAuthService().registerWithMail(otopark).then((value) => {
+            if (value)
+              {
+                Fluttertoast.showToast(
+                    msg: 'Otopark Kaydı Tamamlandı',
+                    timeInSecForIosWeb: 3,
+                    gravity: ToastGravity.CENTER,
+                    backgroundColor: Colors.green,
+                    toastLength: Toast.LENGTH_LONG)
+              }
+          });
+      FocusScope.of(context).unfocus();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,12 +184,7 @@ class _MyFormState extends State<MyForm> {
           SizedBox(height: 35),
           //-------------- Buton --------------//
           ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Kayıt İşlemi Yapılıyor..')));
-              }
-            },
+            onPressed: addCarPark,
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)),
